@@ -35,4 +35,17 @@ Terraform module for Azure managed PostgreSQL Database
 | vnet\_rule\_name\_prefix | Specifies prefix for vnet rule names. | string | `"postgresql-vnet-rule-"` | no |
 | vnet\_rules | The list of maps, describing vnet rules. Valud map items: name, subnet\_id. | list | `[]` | no |
 
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| administrator\_login |  |
+| administrator\_password |  |
+| database\_ids | The list of all database resource ids |
+| firewall\_rule\_ids | The list of all firewall rule resource ids |
+| server\_fqdn | The fully qualified domain name \(FQDN\) of the PostgreSQL server |
+| server\_id | The resource id of the PostgreSQL server |
+| server\_name | The name of the PostgreSQL server |
+| vnet\_rule\_ids | The list of all vnet rule resource ids |
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
