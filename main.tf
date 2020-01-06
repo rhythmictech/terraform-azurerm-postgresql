@@ -37,7 +37,7 @@ resource "azurerm_postgresql_server" "server" {
   version                      = var.server_version
   ssl_enforcement              = var.ssl_enforcement
 
-  tags = var.tags
+  tags = module.tags.tags
 }
 
 resource "azurerm_postgresql_database" "dbs" {
