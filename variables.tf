@@ -26,7 +26,7 @@ variable "location" {
 }
 
 variable "server_name" {
-  description = "Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created."
+  description = "Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created. Server name must only contain lowercase letters, numbers, and hyphens. The server name must not start or end in a hyphen. "
   type        = string
 }
 

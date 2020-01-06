@@ -15,7 +15,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_postgresql_server" "server" {
-  name                = var.server_name
+  name                = lower(var.server_name)
   location            = var.location
   resource_group_name = var.resource_group_name
 
@@ -42,7 +42,7 @@ resource "azurerm_postgresql_server" "server" {
 
 resource "azurerm_postgresql_database" "dbs" {
   count               = length(var.db_names)
-  name                = var.db_names[count.index]
+  name                = lower(var.db_names[count.index])
   resource_group_name = var.resource_group_name
   server_name         = azurerm_postgresql_server.server.name
   charset             = var.db_charset
