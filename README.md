@@ -22,7 +22,7 @@ Terraform module for Azure managed PostgreSQL Database
 | name | Moniker to apply to all resources in the module | string | n/a | yes |
 | postgresql\_configurations | A map with PostgreSQL configurations to enable. | map(string) | `{}` | no |
 | resource\_group\_name | The name of the resource group in which to create the PostgreSQL Server. Changing this forces a new resource to be created. | string | n/a | yes |
-| server\_name | Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created. | string | n/a | yes |
+| server\_name | Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created. Server name must only contain lowercase letters, numbers, and hyphens. The server name must not start or end in a hyphen. | string | n/a | yes |
 | server\_version | Specifies the version of PostgreSQL to use. Valid values are 9.5, 9.6, and 10.0. Changing this forces a new resource to be created. | string | `"9.5"` | no |
 | sku\_capacity | The scale up/out capacity, representing server's compute units | string | `"2"` | no |
 | sku\_family | The family of hardware Gen4 or Gen5. | string | `"Gen4"` | no |
