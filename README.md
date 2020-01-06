@@ -1,8 +1,7 @@
-# terraform-azurerm-template
-[![](https://github.com/rhythmictech/terraform-azurerm-template/workflows/check/badge.svg)](https://github.com/rhythmictech/terraform-azurerm-template/actions)
+# terraform-azurerm-postgresql
+[![](https://github.com/rhythmictech/terraform-azurerm-postgresql/workflows/check/badge.svg)](https://github.com/rhythmictech/terraform-azurerm-postgresql/actions)
 
-Template repo for Azure module
-
+Terraform module for Azure managed PostgreSQL Database
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
