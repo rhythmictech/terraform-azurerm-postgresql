@@ -20,9 +20,6 @@ module "postgresql" {
   env          = "test"
   server_name  = "postgresql${random_id.name.hex}"
   sku_name     = "GP_Gen5_2"
-  sku_capacity = 2
-  sku_tier     = "GeneralPurpose"
-  sku_family   = "Gen5"
 
   storage_mb            = 5120
   backup_retention_days = 7
@@ -31,10 +28,10 @@ module "postgresql" {
   administrator_login    = "azureuser"
   administrator_password = "Azur3us3r!"
 
-  server_version  = "9.5"
+  server_version  = "11"
   ssl_enforcement = "Enabled"
 
-  db_names     = var.db_names
-  db_charset   = "UTF8"
-  db_collation = "English_United States.1252"
+  dbs                       = var.db_names
+  firewall_rules            = var.db_firewall_rules
+  postgresql_configurations = var.db_config
 }
