@@ -21,18 +21,3 @@ output "server_id" {
   description = "The resource id of the PostgreSQL server"
   value       = "${azurerm_postgresql_server.server.id}"
 }
-
-output "database_ids" {
-  description = "The list of all database resource ids"
-  value       = ["${azurerm_postgresql_database.dbs.*.id}"]
-}
-
-output "firewall_rule_ids" {
-  description = "The list of all firewall rule resource ids"
-  value       = ["${azurerm_postgresql_firewall_rule.firewall_rules.*.id}"]
-}
-
-output "vnet_rule_ids" {
-  description = "The list of all vnet rule resource ids"
-  value       = ["${azurerm_postgresql_virtual_network_rule.vnet_rules.*.id}"]
-}
