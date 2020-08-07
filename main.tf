@@ -32,7 +32,7 @@ resource "azurerm_postgresql_server" "server" {
 }
 
 resource "azurerm_postgresql_database" "database" {
-  for_each            = var.dbs
+  for_each = var.dbs
 
   charset             = lookup(each.value, "charset", "UTF8")
   collation           = lookup(each.value, "collation", "en_US.utf8")
@@ -42,7 +42,7 @@ resource "azurerm_postgresql_database" "database" {
 }
 
 resource "azurerm_postgresql_firewall_rule" "firewall_rule" {
-  for_each            = var.firewall_rules
+  for_each = var.firewall_rules
 
   name                = each.key
   start_ip_address    = each.value.start_ip
@@ -52,7 +52,7 @@ resource "azurerm_postgresql_firewall_rule" "firewall_rule" {
 }
 
 resource "azurerm_postgresql_virtual_network_rule" "vnet_rule" {
-  for_each            = var.vnet_rules
+  for_each = var.vnet_rules
 
   name                = each.key
   subnet_id           = each.value
@@ -61,10 +61,42 @@ resource "azurerm_postgresql_virtual_network_rule" "vnet_rule" {
 }
 
 resource "azurerm_postgresql_configuration" "config" {
-  for_each            = var.postgresql_configurations
+  for_each = var.postgresql_configurations
 
   name                = each.key
   value               = each.value
   resource_group_name = var.resource_group_name
   server_name         = azurerm_postgresql_server.server.name
+}
+
+########################################
+# Monitoring
+########################################
+resource "azurerm_monitor_metric_alert" "this" {
+  for_each            = var.monitor_metric_alert_criteria
+  name                = "${local.name}-${upper(each.key)}"
+  resource_group_name = var.resource_group_name
+  scopes              = [azurerm_postgresql_server.server.id]
+  tags                = module.tags.tags
+
+  action {
+    action_group_id = var.monitor_action_group_id
+  }
+
+  criteria {
+    aggregation      = each.value.aggregation
+    metric_namespace = "Microsoft.DBforPostgreSQL/servers"
+    metric_name      = each.value.metric_name
+    operator         = each.value.operator
+    threshold        = each.value.threshold
+
+    dynamic "dimension" {
+      for_each = each.value.dimension
+      content {
+        name     = dimension.value.name
+        operator = dimension.value.operator
+        values   = dimension.value.value
+      }
+    }
+  }
 }

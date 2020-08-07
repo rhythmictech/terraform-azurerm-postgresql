@@ -16,10 +16,10 @@ module "postgresql" {
   resource_group_name = azurerm_resource_group.test.name
   location            = azurerm_resource_group.test.location
 
-  name         = "toothfairy"
-  env          = "test"
-  server_name  = "postgresql${random_id.name.hex}"
-  sku_name     = "GP_Gen5_2"
+  name        = "toothfairy"
+  env         = "test"
+  server_name = "postgresql${random_id.name.hex}"
+  sku_name    = "GP_Gen5_2"
 
   storage_mb            = 5120
   backup_retention_days = 7

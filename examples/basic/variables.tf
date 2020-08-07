@@ -8,19 +8,19 @@ variable db_names {
   type    = list(string)
 }
 
-variable db_configs = {
+variable db_configs {
   default = {
     "timezone" = "UTC"
   }
-  type    = map
+  type = map
 }
 
-variable db_firewall_rules = {
+variable db_firewall_rules {
   default = {
     "AllowAll" = {
       start_ip = "0.0.0.0"
       end_ip   = "255.255.255.255"
     },
   }
-  type    = map
+  type = map
 }

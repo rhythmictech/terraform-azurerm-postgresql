@@ -37,6 +37,37 @@ variable "location" {
   type        = string
 }
 
+variable "monitor_action_group_id" {
+  default     = ""
+  description = "ID of Azure Monitor Action Group for metric to trigger"
+  type        = string
+}
+
+variable "monitor_metric_alert_criteria" {
+  default = {}
+
+  description = <<EOD
+Map of name = criteria objects, see these docs for options
+https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported#microsoftdbforpostgresqlservers
+EOD
+
+  type = map(object({
+    # criteria.*.aggregation to be one of [Average Count Minimum Maximum Total]
+    aggregation = string
+    metric_name = string
+    # criteria.0.operator to be one of [Equals NotEquals GreaterThan GreaterThanOrEqual LessThan LessThanOrEqual]
+    operator  = string
+    threshold = number
+
+    dimension = map(object({
+      name     = string
+      operator = string
+      values   = list(string)
+    }))
+  }))
+}
+
+
 variable "postgresql_configurations" {
   description = "Map of PostgreSQL configuration settings to create. Key is config name, value is config value"
   type        = map
