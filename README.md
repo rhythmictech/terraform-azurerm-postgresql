@@ -45,8 +45,8 @@ Terraform module for Azure managed PostgreSQL Database
 
 | Name | Description |
 |------|-------------|
-| administrator\_login | n/a |
-| administrator\_password | n/a |
+| administrator\_login | Admin username |
+| administrator\_password | Password for admin user |
 | server\_fqdn | The fully qualified domain name (FQDN) of the PostgreSQL server |
 | server\_id | The resource id of the PostgreSQL server |
 | server\_name | The name of the PostgreSQL server |
