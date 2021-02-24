@@ -16,13 +16,13 @@ variable "backup_retention_days" {
 
 variable "dbs" {
   description = "Map of databases to create, values supported: name, charset, collation"
-  type        = map
+  type        = map(map(string))
   default     = {}
 }
 
 variable "firewall_rules" {
   description = "Map of firewall rules to create. Key is rule name, values are start_ip, end_ip"
-  type        = map
+  type        = map(map(string))
   default     = {}
 }
 
@@ -70,7 +70,7 @@ EOD
 
 variable "postgresql_configurations" {
   description = "Map of PostgreSQL configuration settings to create. Key is config name, value is config value"
-  type        = map
+  type        = map(string)
   default     = {}
 }
 
@@ -122,6 +122,6 @@ variable "tags" {
 
 variable "vnet_rules" {
   description = "Map of vnet rules to create. Key is name, value is vnet id"
-  type        = map
+  type        = map(string)
   default     = {}
 }
