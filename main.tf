@@ -11,14 +11,14 @@ terraform {
 }
 
 resource "azurerm_postgresql_server" "server" {
-  name                = lower(var.server_name)
-  location            = var.location
-  resource_group_name = var.resource_group_name
-
+  name                         = lower(var.server_name)
+  location                     = var.location
+  resource_group_name          = var.resource_group_name
   administrator_login          = var.administrator_login
   administrator_login_password = var.administrator_password
   sku_name                     = var.sku_name
   ssl_enforcement              = var.ssl_enforcement
+  tags                         = var.tags
   version                      = var.server_version
 
   storage_profile {
@@ -27,8 +27,6 @@ resource "azurerm_postgresql_server" "server" {
     geo_redundant_backup  = var.geo_redundant_backup
     storage_mb            = var.storage_mb
   }
-
-  tags = var.tags
 }
 
 resource "azurerm_postgresql_database" "database" {
