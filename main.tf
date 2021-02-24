@@ -74,7 +74,7 @@ resource "azurerm_postgresql_configuration" "config" {
 resource "azurerm_monitor_metric_alert" "this" {
   for_each = var.monitor_metric_alert_criteria
 
-  name                = "${var.name}-${upper(each.key)}"
+  name                = "${var.server_name}-${upper(each.key)}"
   resource_group_name = var.resource_group_name
   scopes              = [azurerm_postgresql_server.server.id]
   tags                = var.tags
