@@ -9,27 +9,27 @@ variable "administrator_password" {
 }
 
 variable "backup_retention_days" {
+  default     = 7
   description = "Backup retention days for the server, supported values are between 7 and 35 days."
   type        = number
-  default     = 7
 }
 
 variable "dbs" {
+  default     = {}
   description = "Map of databases to create, values supported: name, charset, collation"
   type        = map(map(string))
-  default     = {}
 }
 
 variable "firewall_rules" {
+  default     = {}
   description = "Map of firewall rules to create. Key is rule name, values are start_ip, end_ip"
   type        = map(map(string))
-  default     = {}
 }
 
 variable "geo_redundant_backup" {
+  default     = "Disabled"
   description = "Enable Geo-redundant or not for server backup. Valid values for this property are Enabled or Disabled, not supported for the basic tier."
   type        = string
-  default     = "Disabled"
 }
 
 variable "location" {
@@ -69,9 +69,9 @@ EOD
 
 
 variable "postgresql_configurations" {
+  default     = {}
   description = "Map of PostgreSQL configuration settings to create. Key is config name, value is config value"
   type        = map(string)
-  default     = {}
 }
 
 variable "resource_group_name" {
@@ -85,43 +85,43 @@ variable "server_name" {
 }
 
 variable "server_version" {
+  default     = "11"
   description = "Specifies the version of PostgreSQL to use. Valid values are 9.5, 9.6, 10, 10.0, and 11. Changing this forces a new resource to be created."
   type        = string
-  default     = "11"
 }
 
 variable "sku_name" {
+  default     = "B_Gen4_2"
   description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. B_Gen4_1, GP_Gen5_8)."
   type        = string
-  default     = "B_Gen4_2"
 }
 
 variable "ssl_enforcement" {
+  default     = "Enabled"
   description = "Specifies if SSL should be enforced on connections. Possible values are Enabled and Disabled."
   type        = string
-  default     = "Enabled"
 }
 
 variable "storage_autogrow" {
+  default     = "Enabled"
   description = "Enable/Disable auto-growing of the storage. Valid values for this property are Enabled or Disabled."
   type        = string
-  default     = "Enabled"
 }
 
 variable "storage_mb" {
+  default     = 5120
   description = "Max storage allowed for a server. Possible values are between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU and between 5120 MB(5GB) and 4194304 MB(4TB) for General Purpose/Memory Optimized SKUs."
   type        = number
-  default     = 5120
 }
 
 variable "tags" {
+  default     = {}
   description = "User-Defined tags"
   type        = map(string)
-  default     = {}
 }
 
 variable "vnet_rules" {
+  default     = {}
   description = "Map of vnet rules to create. Key is name, value is vnet id"
   type        = map(string)
-  default     = {}
 }
