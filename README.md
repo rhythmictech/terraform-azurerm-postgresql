@@ -8,14 +8,15 @@ Terraform module for Azure managed PostgreSQL Database
 
 | Name | Version |
 |------|---------|
+| terraform | >= 0.12.21 |
 | terraform | >= 0.12 |
-| azurerm | >=1.40.0 |
+| azurerm | >= 1.40 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| azurerm | >=1.40.0 |
+| azurerm | >= 1.40 |
 
 ## Inputs
 
