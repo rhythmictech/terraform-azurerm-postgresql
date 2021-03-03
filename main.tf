@@ -1,24 +1,24 @@
-module "tags" {
-  source  = "rhythmictech/tags/terraform"
-  version = "0.0.2"
 
-  enforce_case = "UPPER"
-  tags         = var.tags
-}
+terraform {
+  required_version = ">= 0.12.21"
 
-provider "azurerm" {
-  version = ">=1.40.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 1.40"
+    }
+  }
 }
 
 resource "azurerm_postgresql_server" "server" {
-  name                = lower(var.server_name)
-  location            = var.location
-  resource_group_name = var.resource_group_name
-
+  name                         = lower(var.server_name)
+  location                     = var.location
+  resource_group_name          = var.resource_group_name
   administrator_login          = var.administrator_login
   administrator_login_password = var.administrator_password
   sku_name                     = var.sku_name
   ssl_enforcement              = var.ssl_enforcement
+  tags                         = var.tags
   version                      = var.server_version
 
   storage_profile {
@@ -27,8 +27,6 @@ resource "azurerm_postgresql_server" "server" {
     geo_redundant_backup  = var.geo_redundant_backup
     storage_mb            = var.storage_mb
   }
-
-  tags = module.tags.tags
 }
 
 resource "azurerm_postgresql_database" "database" {
@@ -72,12 +70,14 @@ resource "azurerm_postgresql_configuration" "config" {
 ########################################
 # Monitoring
 ########################################
+
 resource "azurerm_monitor_metric_alert" "this" {
-  for_each            = var.monitor_metric_alert_criteria
-  name                = "${module.tags.name}-${upper(each.key)}"
+  for_each = var.monitor_metric_alert_criteria
+
+  name                = "${var.server_name}-${upper(each.key)}"
   resource_group_name = var.resource_group_name
   scopes              = [azurerm_postgresql_server.server.id]
-  tags                = module.tags.tags
+  tags                = var.tags
 
   action {
     action_group_id = var.monitor_action_group_id
