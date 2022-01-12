@@ -20,6 +20,18 @@ variable "backup_retention_days" {
   type        = number
 }
 
+variable "create_mode" {
+  default     = "Default"
+  description = "(Optional) The creation mode. Can be used to restore or replicate existing servers. Possible values are Default, Replica, GeoRestore, and PointInTimeRestore. Defaults to Default."
+  type        = string
+}
+
+variable "creation_source_server_id" {
+  default     = ""
+  description = "(Optional) For creation modes other then default the source server ID to use."
+  type        = string
+}
+
 variable "dbs" {
   default     = {}
   description = "Map of databases to create, values supported: name, charset, collation"
@@ -105,6 +117,12 @@ variable "public_network_access_enabled" {
 
 variable "resource_group_name" {
   description = "The name of the resource group in which to create the PostgreSQL Server. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "restore_point_in_time" {
+  default     = ""
+  description = "(Optional) When create_mode is PointInTimeRestore the point in time to restore from creation_source_server_id. Use ISO8601 format."
   type        = string
 }
 

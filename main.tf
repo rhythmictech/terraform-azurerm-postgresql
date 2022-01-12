@@ -5,10 +5,13 @@ resource "azurerm_postgresql_server" "server" {
   administrator_login_password     = var.administrator_password
   auto_grow_enabled                = var.auto_grow_enabled
   backup_retention_days            = var.backup_retention_days
+  create_mode                      = var.create_mode
+  creation_source_server_id        = var.create_mode == "Default" ? null : var.creation_source_server_id
   geo_redundant_backup_enabled     = var.geo_redundant_backup_enabled
   location                         = var.location
   public_network_access_enabled    = var.public_network_access_enabled
   resource_group_name              = var.resource_group_name
+  restore_point_in_time            = var.create_mode == "PointInTimeRestore" ? var.restore_point_in_time : null
   sku_name                         = var.sku_name
   ssl_enforcement_enabled          = var.ssl_enforcement_enabled
   ssl_minimal_tls_version_enforced = var.ssl_minimal_tls_version_enforced
